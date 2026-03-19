@@ -6,12 +6,12 @@ import LayoutShell from "@/components/LayoutShell";
 
 export const metadata: Metadata = {
   title: {
-    default: "UNBOX",
-    template: "%s | UNBOX",
+    default: "미라클온",
+    template: "%s | 미라클온",
   },
-  description: "UNBOX 사회봉사단체 당신의 선물이 되어주겠습니다.",
+  description: "미라클온 재능기부단체로서 당신에게 기적이 되어주겠습니다.",
   keywords: [
-    "UNBOX",
+    "미라클온",
     "봉사단체",
     "AI수업",
     "코딩수업",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "SY컨설팅",
+    title: "미라클온",
     description: "사업자·법인, 세무, 자산, 상속·증여 컨설팅",
     type: "website",
     locale: "ko_KR",
