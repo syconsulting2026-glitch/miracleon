@@ -23,6 +23,8 @@ const handler = NextAuth({
             body: JSON.stringify({ adminId, password }),
           });
 
+          console.log(r);
+
           if (!r.ok) return null;
           const data = await r.json();
 
