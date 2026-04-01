@@ -195,7 +195,7 @@ export default function AdminGalleryPage() {
                         <div>
                           {item.thumbnail ? (
                             <img
-                              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item.thumbnail.fileUrl}`}
+                              src={`${item.thumbnail.fileUrl}`}
                               alt={item.thumbnail.originalName}
                               className="h-16 w-24 rounded-lg object-cover"
                             />

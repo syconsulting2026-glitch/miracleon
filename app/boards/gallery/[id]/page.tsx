@@ -81,7 +81,7 @@ export default function GalleryDetailPage() {
                     className="overflow-hidden rounded-2xl border border-gray-200 bg-gray-50"
                   >
                     <img
-                      src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image.fileUrl}`}
+                      src={`${image.fileUrl}`}
                       alt={image.originalName}
                       className="h-72 w-full object-cover"
                     />

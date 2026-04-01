@@ -22,6 +22,7 @@ export default function NoticeDetailPage() {
 
   const { data: notice, isLoading, isError, error } = useNoticeDetail(id);
 
+
   return (
     <div className="bg-white text-gray-900">
       <section className="mx-auto max-w-5xl px-4 py-14 sm:px-6 lg:px-8">
@@ -85,7 +86,7 @@ export default function NoticeDetailPage() {
                 <div className="space-y-3">
                   {notice.attachments.map((file) => {
                     const fileHref = file.fileUrl
-                      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}${file.fileUrl}`
+                      ? `${file.fileUrl}`
                       : null;
 
                     return (
@@ -110,7 +111,7 @@ export default function NoticeDetailPage() {
                               rel="noreferrer"
                               className="inline-flex h-10 items-center justify-center rounded-xl border border-gray-300 bg-white px-4 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"
                             >
-                              열기
+                              열기{fileHref}
                             </a>
                           )}
                         </div>

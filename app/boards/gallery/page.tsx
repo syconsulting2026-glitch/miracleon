@@ -101,7 +101,7 @@ export default function GalleryListPage() {
               >
                 {item.thumbnail ? (
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${item.thumbnail.fileUrl}`}
+                    src={`${item.thumbnail.fileUrl}`}
                     alt={item.thumbnail.originalName}
                     className="h-64 w-full object-cover transition duration-300 group-hover:scale-[1.02]"
                   />

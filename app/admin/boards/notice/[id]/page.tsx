@@ -27,10 +27,11 @@ export default function AdminNoticeDetailPage() {
   const id = Number(params.id);
 
   const { data: notice, isLoading, isError, error } = useNoticeDetail(id);
+
   const deleteMutation = useDeleteNotice();
 
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
-
+  
   const handleDelete = async () => {
     if (!notice) return;
 
@@ -139,7 +140,7 @@ export default function AdminNoticeDetailPage() {
 
                               {file.fileUrl && (
                                 <a
-                                  href={`${process.env.NEXT_PUBLIC_API_BASE_URL}${file.fileUrl}`}
+                                  href={`${file.fileUrl}`}
                                   target="_blank"
                                   rel="noreferrer"
                                   className="inline-flex h-10 items-center justify-center rounded-xl border border-gray-300 bg-white px-4 text-sm font-semibold text-gray-700 transition hover:bg-gray-100"

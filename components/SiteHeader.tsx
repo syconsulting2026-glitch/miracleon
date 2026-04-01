@@ -68,21 +68,21 @@ export default function SiteHeader() {
     };
   }, [mobileOpen]);
 
-  const headerCls = scrolled
+const headerCls = scrolled
     ? "fixed top-0 left-0 right-0 z-40 border-b border-black/10 bg-white/90 backdrop-blur"
     : "fixed top-0 left-0 right-0 z-40 border-b border-transparent bg-transparent bg-white/50";
 
-  const linkBase = "rounded-xl px-4 py-2 text-sm transition font-bold";
+const linkBase = "rounded-xl px-4 py-2 text-sm transition font-bold";
 
   // const normalLink = scrolled
   //   ? "text-black/80 hover:bg-black/5 hover:text-black font-bold"
   //   : "text-white/80 hover:bg-white/15 hover:text-white font-bold";
-  const normalLink ="text-black/80 hover:bg-black/5 hover:text-black font-bold";
+const normalLink ="text-black/80 hover:bg-black/5 hover:text-black font-bold";
 const activeLink = scrolled 
   ? "text-purple-500" 
   : "text-purple-400 font-bold";
 
-  const ctaLink = scrolled
+const ctaLink = scrolled
     ? "ml-2 bg-black text-white font-semibold hover:bg-black/90 font-bold"
     : "ml-2 bg-white text-black font-semibold hover:bg-white/90 font-bold";
 

@@ -177,7 +177,7 @@ export default function AdminGalleryEditPage() {
                             }`}
                           >
                             <img
-                              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${image.fileUrl}`}
+                              src={`${image.fileUrl}`}
                               alt={image.originalName}
                               className="h-44 w-full object-cover"
                             />
