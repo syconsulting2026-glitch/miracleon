@@ -22,7 +22,7 @@ export default function SiteHeader() {
 
   const menu: MenuItem[] = useMemo(
     () => [
-      { label: "UNBOX 소개", 
+      { label: "Miracle ON 소개", 
         href: "/about",
         
       },
@@ -79,8 +79,8 @@ export default function SiteHeader() {
   //   : "text-white/80 hover:bg-white/15 hover:text-white font-bold";
   const normalLink ="text-black/80 hover:bg-black/5 hover:text-black font-bold";
 const activeLink = scrolled 
-  ? "text-orange-500" 
-  : "text-orange-400 font-bold";
+  ? "text-purple-500" 
+  : "text-purple-400 font-bold";
 
   const ctaLink = scrolled
     ? "ml-2 bg-black text-white font-semibold hover:bg-black/90 font-bold"
@@ -104,13 +104,12 @@ const dropdownItem =
       <header className={headerCls}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 ">
           <Link href="/" className="flex items-center gap-2">
-            <Image
-              alt="로고"
-              src={"/images/unbox.png"}
+            <img alt="로고"
+              src={"/images/logo.png"}
               width={80}
               height={30}
-              priority
-            />
+              />
+            
           </Link>
 
           {/* 데스크톱 메뉴 */}
@@ -173,7 +172,7 @@ const dropdownItem =
                                 href={c.href}
                                 className={[
                                   dropdownItem,
-                                  isActive(c.href) ? "bg-orange-100 text-orange-600" : ""
+                                  isActive(c.href) ? "bg-purple-100 text-purple-600" : ""
                                 ].join(" ")}
                               >
                                 {c.label}

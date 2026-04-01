@@ -34,24 +34,6 @@ const stagger: Variants = {
   },
 };
 
-const programs = [
-  {
-    icon: Sparkles,
-    title: "AI 활용 교육",
-    desc: "누구나 쉽게 AI를 이해하고 일상과 업무에 활용할 수 있도록 돕는 실습형 교육을 진행합니다.",
-  },
-  {
-    icon: Code2,
-    title: "코딩 재능기부",
-    desc: "디지털 환경에 익숙하지 않은 이웃과 단체를 위해 코딩과 기술을 나누는 활동을 이어갑니다.",
-  },
-  {
-    icon: Recycle,
-    title: "플로깅 활동",
-    desc: "지역사회와 함께 걸으며 환경을 지키고, 작은 실천이 큰 변화로 이어지도록 행동합니다.",
-  },
-];
-
 const values = [
   {
     icon: HeartHandshake,
@@ -92,31 +74,30 @@ const Home = () => {
             animate="show"
           >
             <motion.div variants={fadeUp} className="max-w-3xl">
-              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-4 py-2 text-sm text-orange-700 shadow-sm">
-                <Sparkles className="h-4 w-4 text-orange-500" />
-                AI · 코딩 · 환경 실천을 연결하는 UNBOX
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-purple-200 bg-white px-4 py-2 text-sm text-purple-700 shadow-sm">
+                <Sparkles className="h-4 w-4 text-purple-500" />
+                재능 기부로 기적을 연결하는 Miracle ON
               </div>
 
-              <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                함께 배우고,
+              <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-gray-900 sm:text-5xl md:text-5xl">
+                재능을 ON하면
                 <br />
-                함께 나누고,
+                따뜻함이 켜집니다.
                 <br />
-                <span className="bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
-                  함께 바꾸는 변화
+                <span className="bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent">
+                  따뜻함으로 만들어지는 기적
                 </span>
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-8 text-gray-600 sm:text-lg">
-                UNBOX는 AI 활용 교육, 코딩 재능기부, 플로깅 활동을 통해
-                기술과 실천이 사회에 따뜻하게 연결될 수 있도록 만드는
-                커뮤니티입니다.
+                Miracle ON은 재능기부를 통해 기술과 작은 실천이 사회를 바꾸고<br/>
+                따뜻함을 나눌 수 있도록 만드는 커뮤니티입니다.
               </p>
 
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#programs"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
                 >
                   주요 활동 보기
                   <ArrowRight className="h-4 w-4" />
@@ -124,7 +105,7 @@ const Home = () => {
 
                 <a
                   href="#about"
-                  className="inline-flex items-center justify-center rounded-2xl border border-orange-300 bg-white px-6 py-3 text-sm font-semibold text-orange-600 transition hover:bg-orange-50"
+                  className="inline-flex items-center justify-center rounded-2xl border border-purple-300 bg-white px-6 py-3 text-sm font-semibold text-purple-600 transition hover:bg-orange-50"
                 >
                   UNBOX 소개
                 </a>
@@ -136,25 +117,27 @@ const Home = () => {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
                     <Sparkles className="mb-4 h-8 w-8 text-orange-500" />
-                    <h3 className="text-lg font-bold text-gray-900">AI 활용 수업</h3>
+                    <h3 className="text-lg font-bold text-gray-900">스마트폰 활용 수업</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
-                      쉽게 배우고 바로 써보는 실전형 AI 교육
+                      쉽게 배우고 활용할 수 있는 교육
                     </p>
                   </div>
 
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
                     <Code2 className="mb-4 h-8 w-8 text-orange-500" />
-                    <h3 className="text-lg font-bold text-gray-900">코딩 재능기부</h3>
+                    <h3 className="text-lg font-bold text-gray-900">AI 활용 응용</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
-                      기술을 나누며 디지털 격차를 줄이는 활동
+                      GPT, 제미나이, 코딩 등을 활용 응용 교육
                     </p>
                   </div>
 
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm sm:col-span-2">
                     <Recycle className="mb-4 h-8 w-8 text-orange-500" />
-                    <h3 className="text-lg font-bold text-gray-900">플로깅 캠페인</h3>
+                    <h3 className="text-lg font-bold text-gray-900">생활 체육과 문화생활</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
-                      걷고 줍고 연결하며 지역사회와 환경을 함께 생각하는 실천
+                      탁구, 캘리그라피 등 
+                      생활 체육과 문화생활을 통해<br/>
+                      건강한 삶을 위한 계획
                     </p>
                   </div>
                 </div>
@@ -183,13 +166,13 @@ const Home = () => {
             className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]"
           >
             <motion.div variants={fadeUp}>
-              <p className="text-sm font-semibold tracking-[0.2em] text-orange-500">
-                ABOUT UNBOX
+              <p className="text-sm font-semibold tracking-[0.2em] text-purple-500">
+                ABOUT Miracle ON
               </p>
               <h2 className="mt-4 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
                 배움과 나눔,
                 <br />
-                그리고 실천을 잇는 공간
+                따뜻한 기적을 만드는 곳
               </h2>
             </motion.div>
 
@@ -198,63 +181,16 @@ const Home = () => {
               className="rounded-[28px] border border-gray-200 bg-white p-7 shadow-sm"
             >
               <p className="text-base leading-8 text-gray-600">
-                UNBOX는 단순히 지식을 전달하는 곳이 아니라, 사람과 기술,
-                지역사회와 환경을 연결하는 활동을 만들어 갑니다. AI를 배우는
+                Miracle ON은 단순히 지식을 전달하는 곳이 아니라, 사람과 기술,
+                지역사회와 환경을 연결하는 활동을 만들어 갑니다. 
                 교육에서 끝나는 것이 아니라, 배운 기술을 이웃과 나누고 실제
-                사회를 위한 실천으로 이어지게 하는 것이 UNBOX가 지향하는
+                사회를 위한 실천으로 이어지게 하는 것이 Miracle ON이 지향하는
                 방향입니다.
               </p>
             </motion.div>
           </motion.div>
         </div>
       </section>
-
-      {/* PROGRAMS */}
-      <section id="programs" className="relative bg-gray-50">
-        <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.15 }}
-          >
-            <motion.div variants={fadeUp} className="mb-12 text-center">
-              <p className="text-sm font-semibold tracking-[0.2em] text-orange-500">
-                OUR PROGRAMS
-              </p>
-              <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-                UNBOX의 주요 활동
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-gray-600">
-                교육, 나눔, 환경 실천을 중심으로 다양한 프로그램을 운영합니다.
-              </p>
-            </motion.div>
-
-            <div className="grid gap-6 md:grid-cols-3">
-              {programs.map((item, idx) => {
-                const Icon = item.icon;
-
-                return (
-                  <motion.div
-                    key={idx}
-                    variants={fadeUp}
-                    className="group rounded-[28px] border border-gray-200 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-md"
-                  >
-                    <div className="mb-5 inline-flex rounded-2xl bg-gray-100 p-3">
-                      <Icon className="h-6 w-6 text-orange-500" />
-                    </div>
-                    <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-gray-600">
-                      {item.desc}
-                    </p>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* VALUES */}
       <section className="relative border-y border-gray-100 bg-white">
         <div className="mx-auto max-w-7xl px-6 py-24 md:px-10">
@@ -265,11 +201,11 @@ const Home = () => {
             viewport={{ once: true, amount: 0.15 }}
           >
             <motion.div variants={fadeUp} className="mb-12">
-              <p className="text-sm font-semibold tracking-[0.2em] text-orange-500">
+              <p className="text-sm font-semibold tracking-[0.2em] text-purple-500">
                 CORE VALUES
               </p>
               <h2 className="mt-4 text-3xl font-bold text-gray-900 sm:text-4xl">
-                UNBOX가 중요하게 생각하는 가치
+                Miracle ON이 중요하게 생각하는 가치
               </h2>
             </motion.div>
 
@@ -283,7 +219,7 @@ const Home = () => {
                     variants={fadeUp}
                     className="rounded-[24px] border border-gray-200 bg-white p-6 shadow-sm"
                   >
-                    <Icon className="mb-4 h-7 w-7 text-orange-500" />
+                    <Icon className="mb-4 h-7 w-7 text-purple-500" />
                     <h3 className="text-lg font-bold text-gray-900">{item.title}</h3>
                     <p className="mt-3 text-sm leading-7 text-gray-600">
                       {item.desc}
@@ -306,8 +242,8 @@ const Home = () => {
             viewport={{ once: true, amount: 0.25 }}
             className="rounded-[32px] border border-gray-200 bg-white p-8 text-center shadow-sm md:p-12"
           >
-            <p className="text-sm font-semibold tracking-[0.2em] text-orange-500">
-              UNBOX MESSAGE
+            <p className="text-sm font-semibold tracking-[0.2em] text-purple-500">
+              Miracle ON MESSAGE
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
               기술은 사람을 향할 때
@@ -315,11 +251,11 @@ const Home = () => {
               가장 큰 가치를 만듭니다
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-gray-600">
-              UNBOX는 배우는 것에서 끝나지 않고, 나누고 실천하는 움직임으로
+              Miracle ON은 배우는 것에서 끝나지 않고, 나누고 실천하는 움직임으로
               이어지는 커뮤니티를 만들어 갑니다.
             </p>
 
-            <div className="mt-8 flex justify-center">
+            {/* <div className="mt-8 flex justify-center">
               <a
                 href="#programs"
                 className="inline-flex items-center gap-2 rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
@@ -327,7 +263,7 @@ const Home = () => {
                 활동 살펴보기
                 <ArrowRight className="h-4 w-4" />
               </a>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </section>
