@@ -64,7 +64,7 @@ const Home = () => {
       {/* HERO */}
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.07),transparent_30%),radial-gradient(circle_at_top_right,rgba(251,146,60,0.06),transparent_30%),linear-gradient(to_bottom,rgba(249,250,251,0.7),rgba(255,255,255,0))]" />
-        <div className="absolute left-1/2 top-24 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-orange-100/60 blur-3xl" />
+        <div className="absolute left-1/2 top-24 h-[320px] w-[320px] -translate-x-1/2 rounded-full bg-purple-100/60 blur-3xl" />
 
         <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-6 pt-28 pb-20 md:px-10">
           <motion.div
@@ -97,7 +97,7 @@ const Home = () => {
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#programs"
-                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+                  className="inline-flex items-center justify-center gap-2 rounded-2xl bg-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-600"
                 >
                   주요 활동 보기
                   <ArrowRight className="h-4 w-4" />
@@ -105,7 +105,7 @@ const Home = () => {
 
                 <a
                   href="#about"
-                  className="inline-flex items-center justify-center rounded-2xl border border-purple-300 bg-white px-6 py-3 text-sm font-semibold text-purple-600 transition hover:bg-orange-50"
+                  className="inline-flex items-center justify-center rounded-2xl border border-purple-300 bg-white px-6 py-3 text-sm font-semibold text-purple-600 transition hover:bg-purple-50"
                 >
                   UNBOX 소개
                 </a>
@@ -116,7 +116,7 @@ const Home = () => {
               <div className="relative mx-auto max-w-xl rounded-[32px] border border-gray-200 bg-white p-5 shadow-[0_20px_60px_rgba(0,0,0,0.08)]">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-                    <Sparkles className="mb-4 h-8 w-8 text-orange-500" />
+                    <Sparkles className="mb-4 h-8 w-8 text-purple-500" />
                     <h3 className="text-lg font-bold text-gray-900">스마트폰 활용 수업</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
                       쉽게 배우고 활용할 수 있는 교육
@@ -124,7 +124,7 @@ const Home = () => {
                   </div>
 
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm">
-                    <Code2 className="mb-4 h-8 w-8 text-orange-500" />
+                    <Code2 className="mb-4 h-8 w-8 text-purple-500" />
                     <h3 className="text-lg font-bold text-gray-900">AI 활용 응용</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
                       GPT, 제미나이, 코딩 등을 활용 응용 교육
@@ -132,7 +132,7 @@ const Home = () => {
                   </div>
 
                   <div className="rounded-3xl border border-gray-200 bg-white p-5 shadow-sm sm:col-span-2">
-                    <Recycle className="mb-4 h-8 w-8 text-orange-500" />
+                    <Recycle className="mb-4 h-8 w-8 text-purple-500" />
                     <h3 className="text-lg font-bold text-gray-900">생활 체육과 문화생활</h3>
                     <p className="mt-2 text-sm leading-6 text-gray-600">
                       탁구, 캘리그라피 등 
@@ -258,7 +258,7 @@ const Home = () => {
             {/* <div className="mt-8 flex justify-center">
               <a
                 href="#programs"
-                className="inline-flex items-center gap-2 rounded-2xl bg-orange-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+                className="inline-flex items-center gap-2 rounded-2xl bg-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:bg-purple-600"
               >
                 활동 살펴보기
                 <ArrowRight className="h-4 w-4" />
