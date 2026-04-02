@@ -50,7 +50,7 @@ export default function FaqPage() {
             자주 묻는 질문
           </h1>
           <p className="mt-3 text-sm text-gray-500 sm:text-base">
-            UNBOX 관련 자주 묻는 질문과 답변을 확인하실 수 있습니다.
+            MIRACLEON 관련 자주 묻는 질문과 답변을 확인하실 수 있습니다.
           </p>
         </div>
 

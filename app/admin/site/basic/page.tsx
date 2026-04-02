@@ -103,7 +103,7 @@ const AdminSiteBasicPage = () => {
                       name="siteName"
                       value={form.siteName}
                       onChange={handleChange}
-                      placeholder="예: UNBOX"
+                      placeholder="예: 미라클온"
                       className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -117,7 +117,7 @@ const AdminSiteBasicPage = () => {
                       name="siteSubTitle"
                       value={form.siteSubTitle}
                       onChange={handleChange}
-                      placeholder="예: 함께 배우고 함께 나누는 UNBOX"
+                      placeholder="예: 함께 배우고 함께 나누는 MIRACLE"
                       className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -146,7 +146,7 @@ const AdminSiteBasicPage = () => {
                     name="siteUrl"
                     value={form.siteUrl}
                     onChange={handleChange}
-                    placeholder="예: https://unbox.kr"
+                    placeholder="예: https://miracle-on.kr"
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
@@ -171,7 +171,7 @@ const AdminSiteBasicPage = () => {
                       name="adminEmail"
                       value={form.adminEmail}
                       onChange={handleChange}
-                      placeholder="예: admin@unbox.kr"
+                      placeholder="예: admin@miracle-on.kr"
                       className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                     />
                   </div>
@@ -330,7 +330,7 @@ const AdminSiteBasicPage = () => {
                     name="footerText"
                     value={form.footerText}
                     onChange={handleChange}
-                    placeholder="예: © 2026 UNBOX. All Rights Reserved."
+                    placeholder="예: © 2026 미라클온. All Rights Reserved."
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                   />
                 </div>

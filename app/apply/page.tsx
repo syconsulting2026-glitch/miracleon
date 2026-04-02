@@ -16,7 +16,7 @@ type HowFound =
 
 const PRIVACY_POLICY_TEXT = `개인정보처리방침(수강 신청)
 
-UNBOX(이하 “회사”)는 「개인정보 보호법」 등 관련 법령을 준수하며, 수강 신청 및 상담 안내를 위해 이용자의 개인정보를 안전하게 처리합니다.
+MIRACLE(이하 “회사”)은 「개인정보 보호법」 등 관련 법령을 준수하며, 수강 신청 및 상담 안내를 위해 이용자의 개인정보를 안전하게 처리합니다.
 
 1. 수집하는 개인정보 항목
 - 필수 항목: 이름, 연락처(휴대전화), 거주지역(구/군 및 동/읍/면), 지원동기, 유입경로(알게 된 계기)
@@ -231,7 +231,7 @@ export default function ApplyPage() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10">
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-        <p className="text-sm font-semibold text-blue-600">UNBOX</p>
+        <p className="text-sm font-semibold text-blue-600">MIRACLEON</p>
         <h1 className="mt-2 text-2xl font-bold text-gray-900">수강 신청</h1>
         <p className="mt-2 text-sm text-gray-500">AI 또는 CODING 수업 신청서를 작성해 주세요.</p>
 

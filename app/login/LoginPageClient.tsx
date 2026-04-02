@@ -55,7 +55,7 @@ export default function LoginPageClient() {
       <div className="mx-auto flex min-h-[80vh] max-w-md items-center justify-center">
         <div className="w-full rounded-3xl border border-gray-200 bg-white p-8 shadow-xl">
           <div className="mb-8 text-center">
-            <p className="text-sm uppercase tracking-[0.3em] text-gray-500">UNBOX ADMIN</p>
+            <p className="text-sm uppercase tracking-[0.3em] text-gray-500">MIRACLEON ADMIN</p>
             <h1 className="mt-3 text-3xl font-semibold">관리자 로그인</h1>
             <p className="mt-2 text-sm text-gray-500">
               관리자 페이지 접근을 위해 로그인해 주세요.

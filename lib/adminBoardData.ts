@@ -11,13 +11,13 @@ export type NoticeItem = {
 export const noticeMockData: NoticeItem[] = [
   {
     id: 3,
-    title: "UNBOX 홈페이지 관리자 모드 오픈 안내",
+    title: "MIRACLEON 홈페이지 관리자 모드 오픈 안내",
     author: "관리자",
     createdAt: "2026-03-13",
     views: 128,
     isPinned: true,
     content: `
-안녕하세요. UNBOX 관리자 페이지가 오픈되었습니다.
+안녕하세요. MIRACLEON 관리자 페이지가 오픈되었습니다.
 
 이번 버전에서는 아래 기능이 포함됩니다.
 

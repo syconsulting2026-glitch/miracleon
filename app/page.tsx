@@ -107,7 +107,7 @@ const Home = () => {
                   href="#about"
                   className="inline-flex items-center justify-center rounded-2xl border border-purple-300 bg-white px-6 py-3 text-sm font-semibold text-purple-600 transition hover:bg-purple-50"
                 >
-                  UNBOX 소개
+                  미라클온 소개
                 </a>
               </div>
             </motion.div>

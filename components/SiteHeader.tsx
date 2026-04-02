@@ -99,7 +99,7 @@ const dropdownItem =
   return (
     <>
       <Head>
-        <title>UNBOX</title>
+        <title>MIRACLEON</title>
       </Head>
       <header className={headerCls}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 ">

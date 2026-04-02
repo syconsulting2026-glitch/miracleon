@@ -56,7 +56,7 @@ export default function NoticeListPage() {
             공지사항
           </h1>
           <p className="mt-3 text-sm text-gray-500 sm:text-base">
-            UNBOX의 소식과 공지 내용을 확인해보세요.
+            MIRACLEON의 소식과 공지 내용을 확인해보세요.
           </p>
         </div>
 

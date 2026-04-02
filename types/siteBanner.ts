@@ -1,6 +1,6 @@
 export type BannerCategory =
   | "메인"
-  | "UNBOX소개"
+  | "MIRACLEON소개"
   | "설립목적"
   | "주요사업"
   | "철학가치관"

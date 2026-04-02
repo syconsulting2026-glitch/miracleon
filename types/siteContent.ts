@@ -1,5 +1,5 @@
 export type ContentCategory =
-  | "미라클온소개"
+  | "MIRACLEON소개"
   | "설립목적"
   | "주요사업"
   | "철학가치관";

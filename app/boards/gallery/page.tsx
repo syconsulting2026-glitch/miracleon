@@ -56,7 +56,7 @@ export default function GalleryListPage() {
             활동 갤러리
           </h1>
           <p className="mt-3 text-sm text-gray-500 sm:text-base">
-            UNBOX의 활동 사진을 확인해보세요.
+            MIRACLEON의 활동 사진을 확인해보세요.
           </p>
         </div>
 

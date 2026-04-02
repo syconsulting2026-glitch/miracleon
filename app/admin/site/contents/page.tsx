@@ -9,7 +9,7 @@ import { useSaveSiteContent } from "@/hooks/useSaveSiteContent";
 import { SaveSiteContentPayload } from "@/types/siteContent";
 import { useSiteContents } from "@/hooks/useSiteContents";
 import { SiteContentPageItem } from "@/types/siteContent";
-type ContentCategory = "UNBOX소개" | "설립목적" | "주요사업" | "철학가치관";
+type ContentCategory = "MIRACLEON소개" | "설립목적" | "주요사업" | "철학가치관";
 type PreviewDevice = "desktop" | "tablet" | "mobile";
 type SectionType = "text" | "imageText" | "cta" | "titleImage" | "cardGrid";
 type TextAlign = "left" | "center" | "right";
@@ -112,7 +112,7 @@ type ContentSection =
 type CategoryState = Record<ContentCategory, ContentSection[]>;
 
 const CATEGORY_OPTIONS: ContentCategory[] = [
-    "UNBOX소개",
+    "MIRACLEON소개",
     "설립목적",
     "주요사업",
     "철학가치관",
@@ -225,14 +225,14 @@ const createCardGridSection = (id: number): CardGridSection => ({
     ],
 });
 const createInitialState = (): CategoryState => ({
-    UNBOX소개: [
+    MIRACLEON소개: [
         {
             ...createTextSection(1),
             name: "소개 상단 문구",
-            eyebrow: "UNBOX",
-            title: "함께 배우고 함께 나누는 UNBOX",
+            eyebrow: "미라클온",
+            title: "함께 배우고 함께 나누는 미라클온",
             description:
-                "UNBOX는 AI 활용 수업, 코딩 재능기부, 플로깅 활동을 통해 지역사회와 연결되는 가치를 만들어 갑니다.",
+                "미라클온은 AI 활용 수업, 코딩 재능기부, 플로깅 활동을 통해 지역사회와 연결되는 가치를 만들어 갑니다.",
             align: "center",
             background: "white",
         },
@@ -271,7 +271,7 @@ const createInitialState = (): CategoryState => ({
         {
             ...createCtaSection(5),
             name: "주요사업 CTA",
-            title: "UNBOX의 활동을 더 알고 싶다면",
+            title: "MIRACLEON의 활동을 더 알고 싶다면",
             description: "주요사업과 활동 내용을 더 자세히 소개하는 페이지로 연결할 수 있습니다.",
             buttonText: "자세히 보기",
             buttonLink: "/business",
@@ -361,7 +361,7 @@ const AdminContentsPage = () => {
     const { mutateAsync: saveSiteContent, isPending: isSaving } = useSaveSiteContent();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [previewOpen, setPreviewOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState<ContentCategory>("UNBOX소개");
+    const [selectedCategory, setSelectedCategory] = useState<ContentCategory>("MIRACLEON소개");
     const [contents, setContents] = useState<CategoryState>(createInitialState);
     const [selectedSectionId, setSelectedSectionId] = useState<number | null>(1);
     const [nextId, setNextId] = useState(7);
@@ -710,7 +710,7 @@ const AdminContentsPage = () => {
         const baseState = createInitialState();
 
         const mappedState: CategoryState = {
-            UNBOX소개: [],
+            MIRACLEON소개: [],
             설립목적: [],
             주요사업: [],
             철학가치관: [],
@@ -825,7 +825,7 @@ const AdminContentsPage = () => {
         });
 
         return {
-            UNBOX소개: mappedState.UNBOX소개.length ? mappedState.UNBOX소개 : baseState.UNBOX소개,
+            MIRACLEON소개: mappedState.MIRACLEON소개.length ? mappedState.MIRACLEON소개 : baseState.MIRACLEON소개,
             설립목적: mappedState.설립목적.length ? mappedState.설립목적 : baseState.설립목적,
             주요사업: mappedState.주요사업.length ? mappedState.주요사업 : baseState.주요사업,
             철학가치관: mappedState.철학가치관.length ? mappedState.철학가치관 : baseState.철학가치관,

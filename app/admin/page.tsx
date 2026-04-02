@@ -51,7 +51,7 @@ const AdminDashboardTemplate = () => {
               <ul className="space-y-3 text-sm">
                 <ActivityItem title="2026.03.01 AI 강의 1기 공지" time="3분 전" />
                 <ActivityItem title="홈페이지 오픈" time="18분 전" />
-                <ActivityItem title="UNBOX 겨울 봉사 공지" time="1시간 전" />
+                <ActivityItem title="미라클온 겨울 봉사 공지" time="1시간 전" />
               </ul>
             </div>
           </section>

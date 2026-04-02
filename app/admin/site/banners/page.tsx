@@ -38,7 +38,7 @@ import { useSaveSiteBanner } from "@/hooks/useSaveSiteBanner";
 
 const createInitialBannerData = (): Record<BannerCategory, BannerCategoryState> => ({
   메인: createCategoryState(),
-  UNBOX소개: createCategoryState(),
+  MIRACLEON소개: createCategoryState(),
   설립목적: createCategoryState(),
   주요사업: createCategoryState(),
   철학가치관: createCategoryState(),

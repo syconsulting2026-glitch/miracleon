@@ -19,7 +19,7 @@ const Sidebar = ({ sidebarOpen }: SidebarProps) => {
         </div>
         <div>
           <div className="font-semibold leading-tight">관리자 콘솔</div>
-          <div className="text-xs text-gray-500">UNBOX</div>
+          <div className="text-xs text-gray-500">MIRACLEON</div>
         </div>
       </div>
 

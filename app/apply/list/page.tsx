@@ -105,7 +105,7 @@ export default function ApplyListClient() {
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <section className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
-          <p className="text-sm font-semibold text-blue-600">UNBOX</p>
+          <p className="text-sm font-semibold text-blue-600">MIRACLEON</p>
           <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
             수강신청 목록
           </h1>
