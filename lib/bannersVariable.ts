@@ -1,6 +1,6 @@
 export type BannerCategory =
   | "메인"
-  | "UNBOX소개"
+  | "미라클온소개"
   | "설립목적"
   | "주요사업"
   | "철학가치관"
@@ -36,7 +36,7 @@ export type BannerCategoryState = {
 
 export const CATEGORY_OPTIONS: BannerCategory[] = [
   "메인",
-  "UNBOX소개",
+  "미라클온소개",
   "설립목적",
   "주요사업",
   "철학가치관",
