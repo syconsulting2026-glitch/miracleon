@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-
+import { useSiteBasic } from "@/hooks/useSiteBasic";
 type MenuItem = {
   label: string;
   href: string;
@@ -15,6 +15,7 @@ type MenuItem = {
 };
 
 export default function SiteHeader() {
+  const { data: siteInfo } = useSiteBasic();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openGroup, setOpenGroup] = useState<string | null>(null);
@@ -104,11 +105,11 @@ const dropdownItem =
       <header className={headerCls}>
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 ">
           <Link href="/" className="flex items-center gap-2">
-            <img alt="로고"
-              src={"/images/logo.png"}
-              width={80}
-              height={30}
-              />
+            {siteInfo?.logoImageUrl ? (
+        <img src={`${process.env.NEXT_PUBLIC_API_BASE_URL}${siteInfo.logoImageUrl}`} alt="Logo" width={60} height={30}/>
+      ) : (
+        <h1>{siteInfo?.siteName || "로딩 중..."}</h1>
+      )}
             
           </Link>
 

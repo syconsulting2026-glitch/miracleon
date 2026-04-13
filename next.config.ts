@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         hostname: "syconsulting-bucket.s3.ap-northeast-2.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "miracleon.s3.ap-northeast-2.amazonaws.com",
+        pathname: "/**",
+      },
     ],
   },
 };

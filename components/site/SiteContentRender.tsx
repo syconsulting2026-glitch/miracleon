@@ -112,16 +112,11 @@ export default function SiteContentRenderer({ category }: Props) {
         const animation = (section.animation ?? "fadeUp") as AnimationType;
 
         if (section.type === "text") {
-          const sectionBg =
-            section.background === "white"
-              ? "bg-white"
-              : section.background === "gray"
-              ? "bg-gray-50"
-              : "bg-gray-900";
+          
 
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16 ${sectionBg}`}>
+              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
                 <div
                   className={[
                     "mx-auto flex max-w-4xl flex-col",
@@ -135,7 +130,7 @@ export default function SiteContentRenderer({ category }: Props) {
                     <p
                       className="mb-3 text-xs font-semibold uppercase tracking-[0.24em]"
                       style={{
-                        color: section.background === "dark" ? "#FFFFFF99" : "#F97316",
+                        color: section.backgroundColor === "dark" ? "#FFFFFF99" : "#F97316",
                       }}
                     >
                       {section.eyebrow}
@@ -162,7 +157,7 @@ export default function SiteContentRenderer({ category }: Props) {
         }
 
         if (section.type === "imageText") {
-          const bgClass = section.background === "gray" ? "bg-gray-50" : "bg-white";
+          
 
           const textAlignClass =
             align === "center"
@@ -222,7 +217,7 @@ export default function SiteContentRenderer({ category }: Props) {
 
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16 ${bgClass}`}>
+              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
                 <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-2">
                   {section.layout === "right" ? (
                     <>
@@ -249,7 +244,7 @@ export default function SiteContentRenderer({ category }: Props) {
             <AnimatedSection key={section.id} animation={animation}>
               <section className="bg-white px-6 py-16 sm:px-10 lg:px-16">
                 <div className="mx-auto max-w-6xl">
-                  <div className={`rounded-3xl px-6 py-10 sm:px-10 ${themeClass}`}>
+                  <div className={`rounded-3xl px-6 py-10 sm:px-10 `} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
                     <div
                       className={[
                         "flex flex-col",
@@ -292,16 +287,11 @@ export default function SiteContentRenderer({ category }: Props) {
         }
 
         if (section.type === "titleImage") {
-          const bgClass =
-            section.background === "white"
-              ? "bg-white"
-              : section.background === "gray"
-              ? "bg-gray-50"
-              : "bg-gray-900";
+          
 
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16 ${bgClass}`}>
+              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
                 <div
                   className={[
                     "mx-auto flex max-w-6xl flex-col gap-8",
@@ -338,12 +328,7 @@ export default function SiteContentRenderer({ category }: Props) {
         }
 
         if (section.type === "cardGrid") {
-          const bgClass =
-            section.background === "white"
-              ? "bg-white"
-              : section.background === "gray"
-              ? "bg-gray-50"
-              : "bg-gray-900";
+          
 
           const columns =
             "grid-cols-1 md:grid-cols-2 lg:grid-cols-" +
@@ -351,7 +336,7 @@ export default function SiteContentRenderer({ category }: Props) {
 
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16 ${bgClass}`}>
+              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
                 <div
                   className={[
                     "mx-auto flex max-w-6xl flex-col",

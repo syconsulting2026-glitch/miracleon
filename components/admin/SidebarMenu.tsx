@@ -17,8 +17,9 @@ const sections: Section[] = [
   {
     id: "site",
     label: "사이트 관리",
-    baseHref: "/admin/site",
+    baseHref: "/admin/site/basic",
     children: [
+      { label: "사이트 기본 설정", href: "/admin/site/basic" },
       { label: "메인 배너 관리", href: "/admin/site/banners" },
       { label: "내용 관리", href: "/admin/site/contents" },
     ],

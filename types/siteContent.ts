@@ -49,7 +49,7 @@ export interface SaveContentSectionPayload {
   descriptionColor?: string | null;
 
   align?: TextAlign | null;
-  background?: SectionBackground | null;
+  backgroundColor?: string | null;
 
   imageUrl?: string | null;
   imageName?: string | null;
@@ -111,7 +111,7 @@ export interface SiteContentSectionItem {
   descriptionColor: string | null;
 
   align: TextAlign | null;
-  background: SectionBackground | null;
+  backgroundColor: string | null;
 
   imageUrl: string | null;
   imageName: string | null;

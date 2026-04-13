@@ -33,7 +33,7 @@ export const saveSiteContent = async (
         descriptionColor: section.descriptionColor ?? null,
 
         align: section.align ?? null,
-        background: section.background ?? null,
+        backgroundColor: section.backgroundColor ?? null,
 
         existingImageUrl: section.existingImageUrl ?? null,
         existingImageName: section.existingImageName ?? null,
