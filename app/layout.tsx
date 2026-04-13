@@ -11,8 +11,11 @@ async function getSiteBasicData() {
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // 백엔드 주소 (예: http://localhost:4000)
   
   try {
-    const res = await fetch(`${API_URL}/site-basic`, {
-      cache: "no-store", // SSR처럼 매번 최신 정보를 가져오도록 설정
+    const res = await fetch(`${API_URL}/api/admin/site-basic`, {
+      // ✅ 기존 cache: "no-store"를 제거하고 revalidate를 설정합니다.
+      // 3600초(1시간)마다 한 번씩 백엔드에서 데이터를 새로 가져옵니다. 
+      // 빌드 시점에도 이 데이터를 사용하여 정적 페이지 생성이 가능해집니다.
+      next: { revalidate: 3600 }, 
     });
 
     if (!res.ok) return null;
