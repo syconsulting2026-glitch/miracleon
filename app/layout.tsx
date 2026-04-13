@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Providers from "./providers";
 import LayoutShell from "@/components/LayoutShell";
-
+export const dynamic = "force-dynamic";
 /**
  * ✅ 서버 측에서 백엔드 API 데이터를 가져오는 함수
  * (generateMetadata는 서버에서 실행되므로 표준 fetch를 사용합니다)
@@ -11,11 +11,8 @@ async function getSiteBasicData() {
   const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL; // 백엔드 주소 (예: http://localhost:4000)
   
   try {
-    const res = await fetch(`${API_URL}/api/admin/site-basic`, {
-      // ✅ 기존 cache: "no-store"를 제거하고 revalidate를 설정합니다.
-      // 3600초(1시간)마다 한 번씩 백엔드에서 데이터를 새로 가져옵니다. 
-      // 빌드 시점에도 이 데이터를 사용하여 정적 페이지 생성이 가능해집니다.
-      next: { revalidate: 3600 }, 
+    const res = await fetch(`${API_URL}/site-basic`, {
+      cache: "no-store", // SSR처럼 매번 최신 정보를 가져오도록 설정
     });
 
     if (!res.ok) return null;
@@ -32,8 +29,7 @@ async function getSiteBasicData() {
  */
 export async function generateMetadata(): Promise<Metadata> {
   const siteInfo = await getSiteBasicData();
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "";
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://back.miracle-on.kr";
   // 기본값 설정
   const title = siteInfo?.siteName || "미라클온";
   const description = siteInfo?.siteDescription || "미라클온 재능기부단체로서 당신에게 기적이 되어주겠습니다.";
@@ -41,6 +37,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogImage = siteInfo?.ogImageUrl ? `${baseUrl}${siteInfo.ogImageUrl}` : "/og-image.png";
 
   return {
+    metadataBase: new URL(baseUrl),
     title: {
       default: title,
       template: `%s | ${title}`,
