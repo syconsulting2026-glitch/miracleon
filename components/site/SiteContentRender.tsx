@@ -292,41 +292,23 @@ export default function SiteContentRenderer({ category }: Props) {
         }
 
         if (section.type === "titleImage") {
-          
+          const textAlignClass =
+            align === "center"
+              ? "text-center items-center"
+              : align === "right"
+              ? "text-right items-end"
+              : "text-left items-start";
+
 
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
-                <div
-                  className={[
-                    "mx-auto flex max-w-6xl flex-col gap-8",
-                    textAlignClassMap[align],
-                    contentAlignClassMap[align],
-                  ].join(" ")}
-                >
-                  <h2
-                    className="text-3xl font-bold sm:text-4xl"
-                    style={{ color: section.titleColor ?? "#111827" }}
-                  >
-                    {section.title}
-                  </h2>
-
-                  <div className="relative min-h-[320px] w-full overflow-hidden rounded-3xl bg-gray-100">
-                    {section.imageUrl ? (
-                      <Image
-                        src={section.imageUrl}
-                        alt={section.title || "section image"}
-                        fill
-                        unoptimized
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="flex min-h-[320px] items-center justify-center text-sm text-gray-400">
-                        이미지가 없습니다
-                      </div>
-                    )}
+              <section key={section.id} className="relative py-24 px-6 overflow-hidden min-h-[300px] flex items-center">
+                  {section.imageUrl && <Image src={section.imageUrl} alt="배경" fill className="object-cover z-0" />}
+                  <div className="absolute inset-0 bg-black/40 z-0" />
+                  <div className={`relative z-10 max-w-4xl mx-auto w-full flex flex-col ${textAlignClass}`} >
+                      <h2 className="text-3xl font-black mb-4" style={{ color: section.titleColor ?? undefined }}>{section.title}</h2>
+                      <p className="text-sm font-medium leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor ?? undefined }}>{section.description}</p>
                   </div>
-                </div>
               </section>
             </AnimatedSection>
           );

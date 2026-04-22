@@ -74,7 +74,7 @@ type CTASection = BaseSection & {
     type: "cta";
     buttonText: string;
     buttonLink: string;
-    buttonColor: string;
+    buttonBgColor: string;
     buttonTextColor: string;
 };
 type TitleImageSection = BaseSection & {
@@ -217,7 +217,7 @@ const AdminContentsPage = () => {
                     }),
                     ...(s.type === "cta" && {
                         buttonText: s.buttonText ?? "자세히 보기",
-                        buttonColor: s.buttonColor ?? "#F97316",
+                        buttonBgColor: s.buttonBgColor ?? "#F97316",
                         buttonTextColor: s.buttonTextColor ?? "#ffffff",
                     }),
                     ...(s.type === "cardGrid" && {
@@ -281,7 +281,7 @@ const AdminContentsPage = () => {
         else if (type === "imageText")
             newSection = { ...base, type: "imageText", imageUrl: "", imagePosition: "left" };
         else if (type === "cta")
-            newSection = { ...base, type: "cta", buttonText: "자세히 보기", buttonLink: "", buttonColor: "#F97316", buttonTextColor: "#ffffff" };
+            newSection = { ...base, type: "cta", buttonText: "자세히 보기", buttonLink: "", buttonBgColor: "#F97316", buttonTextColor: "#ffffff" };
         else if (type === "titleImage")
             newSection = { ...base, type: "titleImage", imageUrl: "" };
         else {
@@ -472,8 +472,8 @@ const AdminContentsPage = () => {
                             <div className="flex flex-wrap items-center gap-2 border-l border-gray-200 pl-3">
                                 <ColorPicker
                                     label="버튼 배경"
-                                    value={section.buttonColor}
-                                    onChange={(color) => updateSection(section.id, { buttonColor: color })}
+                                    value={section.buttonBgColor}
+                                    onChange={(color) => updateSection(section.id, { buttonBgColor: color })}
                                 />
                                 <ColorPicker
                                     label="버튼 글자"
@@ -875,10 +875,10 @@ function SectionPreview({ sections }: { sections: Section[] }) {
 
                 if (section.type === "text") {
                     return (
-                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor }}>
+                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor ?? undefined }}>
                             <div className={`max-w-4xl mx-auto flex flex-col ${alignClass}`}>
-                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor }}>{section.title || "제목 없음"}</h2>
-                                <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>{section.description}</p>
+                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor ?? undefined }}>{section.title || "제목 없음"}</h2>
+                                <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor ?? undefined }}>{section.description}</p>
                             </div>
                         </section>
                     );
@@ -889,14 +889,14 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                     const isTop = section.imagePosition === "top";
 
                     return (
-                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor }}>
+                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor ?? undefined }}>
                             <div className={`max-w-4xl mx-auto flex gap-6 ${isTop ? "flex-col" : isLeft ? "flex-col md:flex-row" : "flex-col md:flex-row-reverse"} items-center`}>
                                 <div className="flex-1 w-full aspect-video relative rounded-2xl overflow-hidden bg-gray-100">
                                     {section.imageUrl ? <Image src={section.imageUrl} alt="이미지" fill className="object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-300"><ImageIcon size={40} /></div>}
                                 </div>
                                 <div className={`flex-1 flex flex-col ${alignClass}`}>
-                                    <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor }}>{section.title}</h2>
-                                    <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>{section.description}</p>
+                                    <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor ?? undefined }}>{section.title}</h2>
+                                    <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor ?? undefined }}>{section.description}</p>
                                 </div>
                             </div>
                         </section>
@@ -905,15 +905,15 @@ function SectionPreview({ sections }: { sections: Section[] }) {
 
                 if (section.type === "cta") {
                     return (
-                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor }}>
+                        <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor ?? undefined }}>
                             <div className={`max-w-4xl mx-auto flex flex-col ${alignClass} gap-6`}>
-                                <h2 className="text-2xl font-bold" style={{ color: section.titleColor }}>{section.title}</h2>
-                                <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>
+                                <h2 className="text-2xl font-bold" style={{ color: section.titleColor ?? undefined }}>{section.title}</h2>
+                                <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor ?? undefined }}>
                                     {section.description}
                                 </p>
                                 <button
                                     className="px-8 py-3 rounded-full font-bold transition-transform hover:scale-105"
-                                    style={{ backgroundColor: section.buttonColor, color: section.buttonTextColor }}
+                                    style={{ backgroundColor: section.buttonBgColor ?? undefined, color: section.buttonTextColor ?? undefined }}
                                 >
                                     {section.buttonText}
                                 </button>
@@ -928,8 +928,8 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                             {section.imageUrl && <Image src={section.imageUrl} alt="배경" fill className="object-cover z-0" />}
                             <div className="absolute inset-0 bg-black/40 z-0" />
                             <div className={`relative z-10 max-w-4xl mx-auto w-full flex flex-col ${alignClass}`} >
-                                <h2 className="text-3xl font-black mb-4" style={{ color: section.titleColor }}>{section.title}</h2>
-                                <p className="text-sm font-medium leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>{section.description}</p>
+                                <h2 className="text-3xl font-black mb-4" style={{ color: section.titleColor ?? undefined }}>{section.title}</h2>
+                                <p className="text-sm font-medium leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor ?? undefined }}>{section.description}</p>
                             </div>
                         </section>
                     );
@@ -940,20 +940,20 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                         <section
                             key={section.id}
                             className="py-12 px-6"
-                            style={{ backgroundColor: section.backgroundColor }}
+                            style={{ backgroundColor: section.backgroundColor ?? undefined }}
                         >
                             <div className={`max-w-4xl mx-auto flex flex-col ${alignClass} mb-10`}>
-                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor }}>{section.title}/</h2>
-                                <p className="text-sm opacity-80" style={{ color: section.descriptionColor }}>{section.description}</p>
+                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor ?? undefined }}>{section.title}/</h2>
+                                <p className="text-sm opacity-80" style={{ color: section.descriptionColor ?? undefined }}>{section.description}</p>
                             </div>
                             <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
                                 {section.items.map((item) => (
-                                    <div key={item.id} className={`p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center`} style={{ backgroundColor: item.cardBgColor }}>
+                                    <div key={item.id} className={`p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center`} style={{ backgroundColor: item.cardBgColor ?? undefined }}>
                                         <div className="w-12 h-12 relative mb-3 rounded-lg overflow-hidden">
                                             {item.iconUrl ? <Image src={item.iconUrl} alt="아이콘" fill className="object-cover" /> : <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-300"><ImageIcon size={20} /></div>}
                                         </div>
-                                        <h3 className="font-bold text-sm mb-2" style={{ color: item.titleColor }}>{item.title}</h3>
-                                        <p className="text-[10px] leading-relaxed" style={{ color: item.descriptionColor }}>{item.description}</p>
+                                        <h3 className="font-bold text-sm mb-2" style={{ color: item.titleColor ?? undefined }}>{item.title}</h3>
+                                        <p className="text-[10px] leading-relaxed" style={{ color: item.descriptionColor ?? undefined }}>{item.description}</p>
                                     </div>
                                 ))}
                             </div>
