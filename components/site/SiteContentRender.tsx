@@ -98,7 +98,11 @@ export default function SiteContentRenderer({ category }: Props) {
       </section>
     );
   }
-
+  const getTextAlignClass = (align: TextAlign) => {
+        if (align === "left") return "text-left items-start";
+        if (align === "right") return "text-right items-end";
+        return "text-center items-center";
+    };
   const page = data.data.find((item) => item.category === category);
 
   if (!page || !page.sections?.length) {
@@ -110,6 +114,7 @@ export default function SiteContentRenderer({ category }: Props) {
       {page.sections.map((section) => {
         const align = (section.align ?? "left") as TextAlign;
         const animation = (section.animation ?? "fadeUp") as AnimationType;
+
 
         if (section.type === "text") {
           

@@ -59,7 +59,7 @@ type BaseSection = {
     description: string;
     titleColor: string;
     descriptionColor: string;
-    textAlign: TextAlign;
+    align: TextAlign;
     backgroundColor: string;
 };
 
@@ -124,6 +124,20 @@ const AdminContentsPage = () => {
     // 1. 상태 추가 (컴포넌트 상단)
     const [selectedImage, setSelectedImage] = useState<string | null>(null); // 모달용
     const [activeDragId, setActiveDragId] = useState<string | null>(null); // 드래그 상태 추적용
+    const [isFloatingSaveButton, setIsFloatingSaveButton] = useState(false); // 최종 저장하기 버튼 플로팅 상태
+
+    // 스크롤 이벤트 리스너 (플로팅 버튼 처리)
+    useEffect(() => {
+        const handleScroll = () => {
+            const headerElement = document.querySelector('header'); // 헤더 요소를 찾습니다.
+            // 헤더의 높이보다 스크롤 위치가 내려가면 플로팅 버튼을 활성화합니다.
+            if (headerElement) {
+                setIsFloatingSaveButton(window.scrollY > headerElement.offsetHeight);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
     // 2. 파일 처리 공통 로직 (핸들러 대체)
     const processFile = (file: File, id: number) => {
         if (!file.type.startsWith("image/")) return alert("이미지 파일만 가능합니다.");
@@ -190,7 +204,7 @@ const AdminContentsPage = () => {
                     ...s,
                     // 서버 데이터에 없을 경우를 대비한 기본값 설정
                     orderIndex: s.orderIndex ?? 0,
-                    textAlign: s.textAlign ?? "center",
+                    align: s.align ?? "center",
                     backgroundColor: s.backgroundColor ?? "#ffffff",
                     animation: s.animation ?? "fadeUp",
                     titleColor: s.titleColor ?? "#111827",
@@ -258,7 +272,7 @@ const AdminContentsPage = () => {
             description: "",
             titleColor: "#111827",
             descriptionColor: "#4B5563",
-            textAlign: "center",
+            align: "center",
             backgroundColor: "#ffffff",
         };
 
@@ -329,24 +343,13 @@ const AdminContentsPage = () => {
         );
     };
 
-    const onDragStart = (id: number) => setDraggingId(id);
-    const onDragOver = (e: DragEvent, id: number) => {
-        e.preventDefault();
-        if (draggingId === null || draggingId === id) return;
-
-        const draggingSection = sections.find((s) => s.id === draggingId);
-        if (!draggingSection) return;
-
-        const newSections = sections.filter((s) => s.id !== draggingId);
-        const overIndex = newSections.findIndex((s) => s.id === id);
-        newSections.splice(overIndex, 0, draggingSection);
-
-        setSections(newSections.map((s, idx) => ({ ...s, orderIndex: idx })));
-    };
+  
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
+
+            console.log(sections);
             const payload: SaveSiteContentPayload = {
                 category: selectedCategory,
                 sections: sections.map((s) => ({
@@ -393,22 +396,22 @@ const AdminContentsPage = () => {
                         {/* [텍스트 정렬 툴바] - 모든 섹션 공통 혹은 타입별 */}
                         <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-gray-100 shadow-sm">
                             <ToolbarButton
-                                active={section.textAlign === "left"}
-                                onClick={() => updateSection(section.id, { textAlign: "left" })}
+                                active={section.align === "left"}
+                                onClick={() => updateSection(section.id, { align: "left" })}
                                 title="왼쪽 정렬"
                             >
                                 <AlignLeft size={18} />
                             </ToolbarButton>
                             <ToolbarButton
-                                active={section.textAlign === "center"}
-                                onClick={() => updateSection(section.id, { textAlign: "center" })}
+                                active={section.align === "center"}
+                                onClick={() => updateSection(section.id, { align: "center" })}
                                 title="중앙 정렬"
                             >
                                 <AlignCenter size={18} />
                             </ToolbarButton>
                             <ToolbarButton
-                                active={section.textAlign === "right"}
-                                onClick={() => updateSection(section.id, { textAlign: "right" })}
+                                active={section.align === "right"}
+                                onClick={() => updateSection(section.id, { align: "right" })}
                                 title="오른쪽 정렬"
                             >
                                 <AlignRight size={18} />
@@ -454,11 +457,14 @@ const AdminContentsPage = () => {
                                 value={section.descriptionColor}
                                 onChange={(color) => updateSection(section.id, { descriptionColor: color })}
                             />
-                            <ColorPicker
+                            {section.type !== "titleImage" &&(
+                                <ColorPicker
                                 label="배경"
                                 value={section.backgroundColor}
                                 onChange={(color) => updateSection(section.id, { backgroundColor: color })}
                             />
+                            )}
+                            
                         </div>
 
                         {/* [CTA 전용: 버튼 컬러] */}
@@ -678,7 +684,8 @@ const AdminContentsPage = () => {
                                     <h1 className="text-3xl font-black tracking-tight text-gray-900">콘텐츠 관리</h1>
                                     <p className="text-sm text-gray-500 mt-1">카테고리별 섹션을 자유롭게 구성하고 스타일을 편집하세요.</p>
                                 </div>
-                                <div className="flex gap-2">
+                                {/* 원래 위치의 저장 버튼 (플로팅 버튼 활성화 시 숨김) */}
+                                <div className={`flex gap-2 ${isFloatingSaveButton ? "opacity-0 pointer-events-none" : ""}`}>
                                     <button
                                         onClick={handleSubmit}
                                         disabled={isPending}
@@ -688,6 +695,19 @@ const AdminContentsPage = () => {
                                     </button>
                                 </div>
                             </header>
+
+                            {/* 플로팅 저장 버튼 (스크롤 시 나타남) */}
+                            {isFloatingSaveButton && (
+                                <div className="fixed bottom-4 right-4 z-50">
+                                    <button
+                                        onClick={handleSubmit}
+                                        disabled={isPending}
+                                        className="bg-orange-500 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all disabled:opacity-50"
+                                    >
+                                        {isPending ? "저장 중..." : "최종 저장하기"}
+                                    </button>
+                                </div>
+                            )}
 
                             {/* 카테고리 탭 */}
                             <nav className="flex flex-wrap gap-2 p-1.5 bg-white rounded-2xl border border-gray-200 shadow-sm">
@@ -851,7 +871,7 @@ function SectionPreview({ sections }: { sections: Section[] }) {
     return (
         <div className="w-full">
             {sections.map((section) => {
-                const alignClass = getTextAlignClass(section.textAlign);
+                const alignClass = getTextAlignClass(section.align);
 
                 if (section.type === "text") {
                     return (
@@ -888,6 +908,9 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                         <section key={section.id} className="py-12 px-6" style={{ backgroundColor: section.backgroundColor }}>
                             <div className={`max-w-4xl mx-auto flex flex-col ${alignClass} gap-6`}>
                                 <h2 className="text-2xl font-bold" style={{ color: section.titleColor }}>{section.title}</h2>
+                                <p className="text-sm leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>
+                                    {section.description}
+                                </p>
                                 <button
                                     className="px-8 py-3 rounded-full font-bold transition-transform hover:scale-105"
                                     style={{ backgroundColor: section.buttonColor, color: section.buttonTextColor }}
@@ -902,9 +925,9 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                 if (section.type === "titleImage") {
                     return (
                         <section key={section.id} className="relative py-24 px-6 overflow-hidden min-h-[300px] flex items-center">
-                            {section.imageUrl && <Image src={section.imageUrl} alt="배경" fill className="object-cover -z-10" />}
-                            <div className="absolute inset-0 bg-black/40 -z-10" />
-                            <div className={`max-w-4xl mx-auto w-full flex flex-col ${alignClass}`}>
+                            {section.imageUrl && <Image src={section.imageUrl} alt="배경" fill className="object-cover z-0" />}
+                            <div className="absolute inset-0 bg-black/40 z-0" />
+                            <div className={`relative z-10 max-w-4xl mx-auto w-full flex flex-col ${alignClass}`} >
                                 <h2 className="text-3xl font-black mb-4" style={{ color: section.titleColor }}>{section.title}</h2>
                                 <p className="text-sm font-medium leading-relaxed whitespace-pre-line" style={{ color: section.descriptionColor }}>{section.description}</p>
                             </div>
@@ -920,12 +943,12 @@ function SectionPreview({ sections }: { sections: Section[] }) {
                             style={{ backgroundColor: section.backgroundColor }}
                         >
                             <div className={`max-w-4xl mx-auto flex flex-col ${alignClass} mb-10`}>
-                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor }}>{section.title}</h2>
+                                <h2 className="text-2xl font-bold mb-4" style={{ color: section.titleColor }}>{section.title}/</h2>
                                 <p className="text-sm opacity-80" style={{ color: section.descriptionColor }}>{section.description}</p>
                             </div>
                             <div className="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
                                 {section.items.map((item) => (
-                                    <div key={item.id} className="p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center" style={{ backgroundColor: item.cardBgColor }}>
+                                    <div key={item.id} className={`p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center`} style={{ backgroundColor: item.cardBgColor }}>
                                         <div className="w-12 h-12 relative mb-3 rounded-lg overflow-hidden">
                                             {item.iconUrl ? <Image src={item.iconUrl} alt="아이콘" fill className="object-cover" /> : <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-300"><ImageIcon size={20} /></div>}
                                         </div>
