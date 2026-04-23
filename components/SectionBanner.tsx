@@ -178,9 +178,7 @@ const SectionBanner = ({
         pagination={showPagination ? { clickable: true } : false}
         navigation={showNavigation && banner.slides.length > 1}
         autoplay={{
-          delay: banner.slides[0]?.duration
-            ? banner.slides[0].duration * 1000
-            : 5000,
+          delay: 5000,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
