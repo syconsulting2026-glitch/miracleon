@@ -39,7 +39,7 @@ export default function SiteHeader() {
       },
       { 
         label: "커뮤니티", 
-        href: "/boards",
+        href: "/boards/notice",
         children: [
           { label: "공지사항", href: "/boards/notice" },
           { label: "활동갤러리", href: "/boards/gallery" },
