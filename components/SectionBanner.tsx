@@ -207,7 +207,7 @@ const SectionBanner = ({
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(249,115,22,0.07),transparent_30%),radial-gradient(circle_at_top_right,rgba(251,146,60,0.06),transparent_30%),linear-gradient(to_bottom,rgba(249,250,251,0.7),rgba(255,255,255,0))]" />
                 )}
 
-                <div className={`absolute inset-0 ${overlayClassName}`} />
+                {/* <div className={`absolute inset-0 ${overlayClassName}`} /> */}
 
                 <div className="relative mx-auto flex h-full max-w-7xl px-6 md:px-10">
                   <div
