@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useSiteBasic } from "@/hooks/useSiteBasic";
 
 type SiteFooterProps = {
   companyName?: string;
@@ -15,6 +16,8 @@ export default function SiteFooter({
   infoLine = "사업자등록번호 216-57-00778 | 대표 신동훈 | 부산광역시 부산진구 전포대로 275번길 65(전포동) | 010-4181-5082",
   copyrightName,
 }: SiteFooterProps) {
+  const { data: siteInfo } = useSiteBasic();
+  console.log(siteInfo);
   const year = new Date().getFullYear();
   const owner = copyrightName ?? companyName;
 
@@ -62,6 +65,22 @@ export default function SiteFooter({
               </Link>
             )}
           </div>
+          {
+            siteInfo?.kakaoLink&&(
+              <div className="fixed bottom-6 right-6 z-50">
+                <Link
+                  href={siteInfo?.kakaoLink} // TODO: 실제 카카오톡 채널 또는 오픈채팅 링크를 입력하세요.
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex h-14 w-14 items-center justify-center rounded-full bg-[#FEE500] shadow-lg transition-transform hover:scale-110 active:scale-95"
+                  title="카카오톡 문의하기"
+                >
+                  <img src="/images/kakaotalk.png" alt="카카오톡" className="h-8 w-8 object-contain" />
+                </Link>
+              </div>
+            )
+          }
+          
         </div>
       </div>
     </footer>
