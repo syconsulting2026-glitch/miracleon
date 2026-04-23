@@ -14,7 +14,8 @@ export type BannerEffect =
   | "coverflow"
   | "flip"
   | "cards"
-  | "creative";
+  | "creative"
+  | "cube";
 export type BannerSlide = {
   id: number;
   title: string;

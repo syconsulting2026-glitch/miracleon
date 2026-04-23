@@ -25,6 +25,7 @@ import {
   EffectFlip,
   EffectCards,
   EffectCreative,
+  EffectCube,
 } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -34,6 +35,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/effect-flip";
 import "swiper/css/effect-cards";
 import "swiper/css/effect-creative";
+import "swiper/css/effect-cube";
 import { useSaveSiteBanner } from "@/hooks/useSaveSiteBanner";
 import {
   Type,
@@ -376,6 +378,16 @@ const AdminSiteBasicPage = () => {
             },
           },
         };
+      case "cube":
+        return {
+          effect: "cube" as const,
+          cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+          },
+        };
       default:
         return {
           effect: "slide" as const,
@@ -389,7 +401,7 @@ const AdminSiteBasicPage = () => {
     try {
       const payload = {
         category: selectedCategory,
-        effect: currentCategoryData.effect,
+        effect: currentCategoryData.effect as any, // TODO: types/siteBanner.ts에서 BannerEffect 타입에 'cube' 추가 필요
         slides: currentSlides.map((slide) => ({
           title: slide.title || null,
           description: slide.description || null,
@@ -517,8 +529,9 @@ const AdminSiteBasicPage = () => {
                           <option value="fade">페이드</option>
                           <option value="coverflow">커버플로우</option>
                           <option value="flip">플립</option>
-                          <option value="cards">카드</option>
                           <option value="creative">크리에이티브</option>
+                          <option value="cards">카드</option>
+                          <option value="cube">큐브</option>
                         </select>
                       </div>
 
@@ -749,7 +762,7 @@ const AdminSiteBasicPage = () => {
                     <div className="overflow-hidden rounded-3xl border-4 border-white shadow-2xl bg-gray-100">
                       <Swiper
                         key={`${selectedCategory}-${currentCategoryData.effect}`}
-                        modules={[Autoplay, Pagination, Navigation, EffectFade, EffectCoverflow, EffectFlip, EffectCards, EffectCreative]}
+                        modules={[Autoplay, Pagination, Navigation, EffectFade, EffectCoverflow, EffectFlip, EffectCards, EffectCreative, EffectCube]}
                         loop={currentSlides.length > 1}
                         pagination={{ clickable: true }}
                         navigation={currentSlides.length > 1}

@@ -11,6 +11,7 @@ import {
   EffectFlip,
   EffectCards,
   EffectCreative,
+  EffectCube,
 } from "swiper/modules";
 import { useSiteBanners } from "@/hooks/useSiteBanners";
 import { BannerCategory, BannerEffect } from "@/lib/bannersVariable";
@@ -24,6 +25,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/effect-flip";
 import "swiper/css/effect-cards";
 import "swiper/css/effect-creative";
+import "swiper/css/effect-cube";
 
 type SectionBannerProps = {
   category: BannerCategory;
@@ -138,6 +140,16 @@ const SectionBanner = ({
             },
           },
         };
+      case "cube":
+        return {
+          effect: "cube" as const,
+          cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94,
+          },
+        };
       default:
         return {
           effect: "slide" as const,
@@ -173,6 +185,7 @@ const SectionBanner = ({
           EffectFlip,
           EffectCards,
           EffectCreative,
+          EffectCube,
         ]}
         loop={banner.slides.length > 1}
         pagination={showPagination ? { clickable: true } : false}
