@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 // 프로젝트의 환경 변수 또는 백엔드 주소에 맞게 설정하세요.
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+const API_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
 
 export type Category = {
   id: number;
