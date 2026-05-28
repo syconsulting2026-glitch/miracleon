@@ -9,6 +9,8 @@ import {
   useDeleteApply,
   useUpdateApplyStatus,
 } from "@/hooks/useApply";
+// ✅ 카테고리 훅 추가
+import { useCategories } from "@/hooks/useCategory";
 import { ApplyStatus } from "@/types/apply";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -33,17 +35,23 @@ export default function AdminApplysPage() {
   const [page, setPage] = useState(1);
   const [qInput, setQInput] = useState("");
   const [q, setQ] = useState("");
-  const [classType, setClassType] = useState<"" | "AI" | "CODING">("");
+  
+  // ✅ classType의 타입을 string으로 확장 (이제 하드코딩된 AI/CODING이 아니므로)
+  const [classType, setClassType] = useState<string>("");
+  
   const [status, setStatus] = useState<"" | ApplyStatus>("");
   const [district, setDistrict] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<ApplyStatus>("CONTACTED");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
+  // ✅ 수업 과목 목록 가져오기 (관리자 필터용이므로 activeOnly=false로 모두 가져와도 무방합니다. 필요시 true로 변경)
+  const { data: classCategories = [], isLoading: isCategoriesLoading } = useCategories();
+
   const { data, isLoading, isError, error } = useApplyList({
     page,
     pageSize: 10,
     q,
-    classType,
+    classType, // 🔥 이 부분이 추가되어야 선택한 수업 종류가 백엔드로 넘어갑니다!
     status,
     district,
     order: "new",
@@ -127,15 +135,24 @@ export default function AdminApplysPage() {
 
           <section className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
             <div className="grid grid-cols-1 gap-3 md:grid-cols-5">
+              {/* ✅ 동적 카테고리가 반영된 select 박스 */}
               <select
                 value={classType}
-                onChange={(e) => setClassType(e.target.value as "" | "AI" | "CODING")}
+                onChange={(e) => setClassType(e.target.value)}
                 className="h-11 rounded-xl border border-gray-200 px-3 text-sm outline-none"
               >
                 <option value="">수업 전체</option>
-                <option value="AI">AI</option>
-                <option value="CODING">CODING</option>
+                {isCategoriesLoading ? (
+                  <option disabled>불러오는 중...</option>
+                ) : (
+                  classCategories.map((cat) => (
+                    <option key={cat.id} value={cat.name}>
+                      {cat.name}
+                    </option>
+                  ))
+                )}
               </select>
+
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as "" | ApplyStatus)}
@@ -148,6 +165,7 @@ export default function AdminApplysPage() {
                   </option>
                 ))}
               </select>
+              
               <input
                 value={qInput}
                 onChange={(e) => setQInput(e.target.value)}
@@ -240,7 +258,7 @@ export default function AdminApplysPage() {
                     <div>{item.id}</div>
                     <div className="min-w-0">
                       <Link
-                        href={`/admin/apply/${item.id}`}
+                        href={`/admin/apply/view/${item.id}`}
                         className="truncate font-semibold text-gray-900 hover:text-blue-600"
                       >
                         {item.name}
@@ -248,7 +266,10 @@ export default function AdminApplysPage() {
                       <p className="truncate text-xs text-gray-500">{item.address}</p>
                     </div>
                     <div>{item.phone}</div>
-                    <div>{item.classType}</div>
+                    {/* ✅ 테이블 목록에서도 과목명 그대로 표시 */}
+                    <div className="truncate pr-2" title={item.classType}>
+                      {item.classType}
+                    </div>
                     <div>
                       <select
                         value={item.status}

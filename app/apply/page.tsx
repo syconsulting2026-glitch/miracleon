@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useCreateApply } from "@/hooks/useApply";
-import type { ApplyClassType } from "@/types/apply";
 import { useCaptcha } from "@/hooks/useCaptcha";
+import { useCategories } from "@/hooks/useCategory";
+// ✅ 추천인 조회를 위한 훅 임포트
+import { useRecommenders } from "@/hooks/useRecommender";
 
 type HowFound =
   | "홈페이지"
@@ -19,7 +21,7 @@ const PRIVACY_POLICY_TEXT = `개인정보처리방침(수강 신청)
 MIRACLE(이하 “회사”)은 「개인정보 보호법」 등 관련 법령을 준수하며, 수강 신청 및 상담 안내를 위해 이용자의 개인정보를 안전하게 처리합니다.
 
 1. 수집하는 개인정보 항목
-- 필수 항목: 이름, 연락처(휴대전화), 거주지역(구/군 및 동/읍/면), 지원동기, 유입경로(알게 된 계기)
+- 필수 항목: 이름, 연락처(휴дзен화), 거주지역(구/군 및 동/읍/면), 지원동기, 유입경로(알게 된 계기)
 - 자동 수집 항목(서비스 이용 과정에서 생성될 수 있음): 접속 로그, IP, 기기정보(브라우저/OS), 쿠키(사용 시)
 
 2. 개인정보 수집 및 이용 목적
@@ -60,7 +62,7 @@ MIRACLE(이하 “회사”)은 「개인정보 보호법」 등 관련 법령�
 `;
 
 type FormState = {
-  classType: ApplyClassType | "";
+  classType: string;
   name: string;
   phone: string;
   district: string;
@@ -81,6 +83,12 @@ const formatPhone = (raw: string) => {
 export default function ApplyPage() {
   const createMutation = useCreateApply();
   const captchaMutation = useCaptcha();
+
+  // 활성화된 수업 목록 패칭
+  const { data: classOptions = [], isLoading: isCategoriesLoading } = useCategories(true);
+
+  // ✅ 활성화된 추천인 목록 패칭 (activeOnly 옵션을 true로 전달)
+  const { data: recommenderOptions = [], isLoading: isRecommendersLoading } = useRecommenders({ activeOnly: true });
 
   const busanAreas = useMemo(
     () => [
@@ -141,8 +149,9 @@ export default function ApplyPage() {
     if (!form.motivation.trim()) e.motivation = "지원동기를 입력해 주세요.";
     if (!form.howFound) e.howFound = "알게 된 계기를 선택해 주세요.";
 
-    if (form.howFound === "지인추천" && !form.recommender.trim()) {
-      e.recommender = "추천인을 입력해 주세요.";
+    // 유입 경로를 '지인추천'으로 고른 경우에만 추천인 선택을 필수로 유효성 검사합니다.
+    if (form.howFound === "지인추천" && !form.recommender) {
+      e.recommender = "추천인을 선택해 주세요.";
     }
 
     if (!form.privacyAgree) {
@@ -177,10 +186,10 @@ export default function ApplyPage() {
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (Object.keys(errors).length > 0) {
-      alert("입력값을 확인해 주세요.");
-      return;
-    }
+    // if (Object.keys(errors).length > 0) {
+    //   alert("입력값을 확인해 주세요.");
+    //   return;
+    // }
 
     if (!startedAt || Date.now() - startedAt < 1500) {
       alert("자동입력방지를 다시 확인해 주세요.");
@@ -189,7 +198,7 @@ export default function ApplyPage() {
 
     try {
       await createMutation.mutateAsync({
-        classType: form.classType as ApplyClassType,
+        classType: form.classType,
         name: form.name.trim(),
         phone: form.phone,
         phoneDigits: form.phone.replace(/[^0-9]/g, ""),
@@ -198,10 +207,8 @@ export default function ApplyPage() {
         address: `${form.district} ${form.neighborhoodDetail}`.trim(),
         motivation: form.motivation.trim(),
         howFound: form.howFound,
-        recommender: form.recommender.trim(),
+        recommender: form.recommender, // 선택된 '이름 (뒷자리)' 문자열 전송
         privacyAgree: form.privacyAgree,
-
-        // ✅ 자동입력방지 전송
         captchaId,
         captchaText: captchaText.trim(),
         captchaStartedAt: startedAt,
@@ -233,19 +240,23 @@ export default function ApplyPage() {
       <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <p className="text-sm font-semibold text-blue-600">MIRACLEON</p>
         <h1 className="mt-2 text-2xl font-bold text-gray-900">수강 신청</h1>
-        <p className="mt-2 text-sm text-gray-500">AI 또는 CODING 수업 신청서를 작성해 주세요.</p>
+        <p className="mt-2 text-sm text-gray-500">원하시는 수업 종류를 선택하고 신청서를 작성해 주세요.</p>
 
         <form onSubmit={onSubmit} className="mt-8 space-y-6">
+          {/* 입력 필드 레이아웃 컨테이너 */}
           <div className="grid gap-5 md:grid-cols-2">
             <Field label="수업 종류" required error={errors.classType}>
               <select
                 value={form.classType}
-                onChange={(e) => setField("classType", e.target.value as ApplyClassType)}
+                onChange={(e) => setField("classType", e.target.value)}
                 className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none"
               >
-                <option value="">선택</option>
-                <option value="AI">AI</option>
-                <option value="CODING">코딩</option>
+                <option value="">{isCategoriesLoading ? "수업 목록 로딩 중..." : "선택"}</option>
+                {classOptions.map((option) => (
+                  <option key={option.id} value={option.name}>
+                    {option.name}
+                  </option>
+                ))}
               </select>
             </Field>
 
@@ -303,17 +314,35 @@ export default function ApplyPage() {
                 ))}
               </select>
             </Field>
-          </div>
 
-          {form.howFound === "지인추천" && (
-            <Field label="추천인" required error={errors.recommender}>
-              <input
+            {/* ✅ 추천인 필드 통합: 상시 노출 구조로 배치 변경 및 select 컴포넌트로 개편 */}
+            <Field 
+              label="추천인" 
+              required={form.howFound === "지인추천"} 
+              error={errors.recommender}
+            >
+              <select
                 value={form.recommender}
                 onChange={(e) => setField("recommender", e.target.value)}
-                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none"
-              />
+                className="h-12 w-full rounded-xl border border-gray-200 px-4 text-sm outline-none bg-white"
+              >
+                <option value="">
+                  {isRecommendersLoading ? "추천인 목록 로딩 중..." : "선택 (선택 사항)"}
+                </option>
+                {recommenderOptions.map((option) => {
+                  // 백엔드 응답 가공 속성(last4Digits)을 바인딩 텍스트로 결합
+                  const displayLabel = option.last4Digits 
+                    ? `${option.name} (${option.last4Digits})` 
+                    : option.name;
+                  return (
+                    <option key={option.id} value={displayLabel}>
+                      {displayLabel}
+                    </option>
+                  );
+                })}
+              </select>
             </Field>
-          )}
+          </div>
 
           <Field label="지원동기" required error={errors.motivation}>
             <textarea

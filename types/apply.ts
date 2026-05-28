@@ -34,14 +34,13 @@ export interface GetApplyListParams {
   page?: number;
   pageSize?: number;
   q?: string;
-  classType?: ApplyClassType | "";
+  classType?:string;
   status?: ApplyStatus | "";
   district?: string;
   order?: "new" | "old";
 }
 
 export interface CreateApplyPayload {
-  classType: ApplyClassType;
   name: string;
   phone: string;
   phoneDigits: string;
@@ -52,6 +51,7 @@ export interface CreateApplyPayload {
   howFound: string;
   recommender?: string;
   privacyAgree: boolean;
+  classType?:string;
 
   // ✅ 자동입력방지
   captchaId: string;

@@ -35,7 +35,16 @@ const sections: Section[] = [
       { label: "FAQ", href: "/admin/boards/faq" },
     ],
   },
-  
+  {
+    id: "applys",
+    label: "수강 관리",
+    baseHref: "/admin/apply",
+    children: [
+      { label: "수강생관리", href: "/admin/apply/" },
+      { label: "과목관리", href: "/admin/apply/category" },
+      { label: "추천인관리", href: "/admin/apply/recommender" },
+    ],
+  },
 ];
 
 const singles = [
@@ -112,11 +121,11 @@ export default function SidebarMenu() {
       })}
 
       {/* 단일 링크 */}
-      <div className="space-y-1 pt-1">
+      {/* <div className="space-y-1 pt-1">
         {singles.map((s) => (
           <SidebarLink key={s.href} label={s.label} href={s.href} showIcon={false} />
         ))}
-      </div>
+      </div> */}
     </nav>
   );
 }
