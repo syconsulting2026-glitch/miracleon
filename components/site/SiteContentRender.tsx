@@ -78,6 +78,7 @@ function AnimatedSection({
 
 export default function SiteContentRenderer({ category }: Props) {
   const { data, isLoading, isError } = useSiteContents();
+  console.log(data);
 
   if (isLoading) {
     return (
@@ -170,9 +171,11 @@ export default function SiteContentRenderer({ category }: Props) {
               : align === "right"
               ? "text-right items-end"
               : "text-left items-start";
-
+          const isLeft = section.imagePosition === "left";
+          const isTop = section.imagePosition === "top";
           const imageBlock = (
             <div className="relative min-h-[280px] overflow-hidden rounded-3xl bg-gray-100">
+  
               {section.imageUrl ? (
                 <Image
                   src={section.imageUrl}

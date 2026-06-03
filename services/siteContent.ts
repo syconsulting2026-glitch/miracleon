@@ -37,6 +37,7 @@ export const saveSiteContent = async (
 
         existingImageUrl: section.existingImageUrl ?? null,
         existingImageName: section.existingImageName ?? null,
+        imagePosition: section.imagePosition ?? null,
         layout: section.layout ?? null,
 
         buttonText: section.buttonText ?? null,

@@ -348,8 +348,7 @@ const AdminContentsPage = () => {
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         try {
-
-            console.log(sections);
+            console.log(sections)
             const payload: SaveSiteContentPayload = {
                 category: selectedCategory,
                 sections: sections.map((s) => ({
@@ -357,12 +356,12 @@ const AdminContentsPage = () => {
                     // 필수 필드인 'name' 추가 (보통 프론트의 title 값을 할당합니다)
                     name: s.title || "",
                     backgroundColor: s.backgroundColor || "#ffffff",
+                    imagePosition: s.type === "imageText" ? s.imagePosition : undefined,
                     // 기존 이미지 URL 처리
                     existingImageUrl:
                         (s.type === "imageText" || s.type === "titleImage")
                             ? (s.imageUrl.startsWith("blob:") ? null : s.imageUrl)
                             : null,
-
                     // 카드 그리드 아이템 처리
                     items: s.type === "cardGrid"
                         ? s.items.map(item => ({
@@ -372,6 +371,7 @@ const AdminContentsPage = () => {
                         : [] // undefined 대신 빈 배열을 보내는 것이 안전할 수 있습니다
                 })),
             };
+
 
             const res = await saveContent(payload);
             if (res.success) {
