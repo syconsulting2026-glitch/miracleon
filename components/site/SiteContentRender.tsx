@@ -162,20 +162,21 @@ export default function SiteContentRenderer({ category }: Props) {
           );
         }
 
-        if (section.type === "imageText") {
-          
-
+       if (section.type === "imageText") {
           const textAlignClass =
             align === "center"
               ? "text-center items-center"
               : align === "right"
               ? "text-right items-end"
               : "text-left items-start";
+              
+          // imagePosition 설정값 가져오기
           const isLeft = section.imagePosition === "left";
           const isTop = section.imagePosition === "top";
+
+          // flex-1과 aspect-video(또는 min-h)를 추가하여 비율 유지
           const imageBlock = (
-            <div className="relative min-h-[280px] overflow-hidden rounded-3xl bg-gray-100">
-  
+            <div className="relative flex-1 w-full min-h-[280px] overflow-hidden rounded-3xl bg-gray-100 aspect-video lg:aspect-auto">
               {section.imageUrl ? (
                 <Image
                   src={section.imageUrl}
@@ -192,8 +193,9 @@ export default function SiteContentRenderer({ category }: Props) {
             </div>
           );
 
+          // flex-1을 추가하여 이미지와 텍스트가 공간을 반씩 나눠 가지도록 설정
           const textBlock = (
-            <div className={`flex flex-col justify-center ${textAlignClass}`}>
+            <div className={`flex flex-1 flex-col justify-center w-full ${textAlignClass}`}>
               <h3
                 className="text-2xl font-bold break-keep sm:text-3xl"
                 style={{ color: section.titleColor ?? "#111827" }}
@@ -223,21 +225,21 @@ export default function SiteContentRenderer({ category }: Props) {
             </div>
           );
 
+          // 프리뷰 화면과 동일하게 imagePosition에 따른 flex 클래스 동적 생성
+          const containerLayoutClass = isTop
+            ? "flex-col" // 이미지가 위 (수직 정렬)
+            : isLeft
+            ? "flex-col lg:flex-row" // 이미지가 왼쪽 (모바일은 수직, PC는 좌우)
+            : "flex-col lg:flex-row-reverse"; // 이미지가 오른쪽 (모바일은 수직, PC는 우좌)
+
           return (
             <AnimatedSection key={section.id} animation={animation}>
-              <section className={`px-6 py-16 sm:px-10 lg:px-16`} style={{backgroundColor:section.backgroundColor??'#ffffff'}}>
-                <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-2">
-                  {section.layout === "right" ? (
-                    <>
-                      {textBlock}
-                      {imageBlock}
-                    </>
-                  ) : (
-                    <>
-                      {imageBlock}
-                      {textBlock}
-                    </>
-                  )}
+              <section className="px-6 py-16 sm:px-10 lg:px-16" style={{ backgroundColor: section.backgroundColor ?? '#ffffff' }}>
+                {/* 기존 grid 대신 flex와 동적 layout 클래스 적용 */}
+                <div className={`mx-auto flex max-w-6xl gap-8 items-center ${containerLayoutClass}`}>
+                  {/* flex-row-reverse가 순서를 뒤집어주므로 항상 image -> text 순으로 배치해도 됩니다 */}
+                  {imageBlock}
+                  {textBlock}
                 </div>
               </section>
             </AnimatedSection>
