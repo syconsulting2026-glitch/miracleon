@@ -13,7 +13,7 @@ type SiteFooterProps = {
 
 export default function SiteFooter({
   companyName = "Miracle ON",
-  infoLine = "사업자등록번호 216-57-00778 | 대표 신동훈 | 부산광역시 부산진구 전포대로 275번길 65(전포동) | 010-4181-5082",
+  infoLine = "대표 신동훈 | 부산광역시 부산진구 전포대로 275번길 65(전포동) | syconsulting2026@gmail.com",
   copyrightName,
 }: SiteFooterProps) {
   const { data: siteInfo } = useSiteBasic();

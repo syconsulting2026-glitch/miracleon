@@ -1,7 +1,5 @@
 "use client";
-
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
@@ -9,7 +7,8 @@ import { useSiteBasic } from "@/hooks/useSiteBasic";
 type MenuItem = {
   label: string;
   href: string;
-  children?: { label: string; href: string }[];
+  target?:string;
+  children?: { label: string; href: string}[];
   cta?: boolean;
   external?: boolean; // ✅ 추가
 };
@@ -23,20 +22,15 @@ export default function SiteHeader() {
 
   const menu: MenuItem[] = useMemo(
     () => [
-      { label: "Miracle ON 소개", 
+      { 
+        label: "Miracle ON 소개", 
         href: "/about",
-        
       },
       {
         label: "설립목적",
         href: "/purpose",
-        
       },
       { label: "주요사업", href: "/business" },
-      { 
-        label: "철학/가치관", 
-        href: "/value",
-      },
       { 
         label: "커뮤니티", 
         href: "/boards/notice",
@@ -47,6 +41,7 @@ export default function SiteHeader() {
           { label: "FAQ", href: "/boards/faq" },
         ],
       },
+      { label: "수강신청", href: "/apply",target: "_blank" },
     ],
     []
   );
@@ -75,9 +70,6 @@ const headerCls = scrolled
 
 const linkBase = "rounded-xl px-4 py-2 text-sm transition font-bold";
 
-  // const normalLink = scrolled
-  //   ? "text-black/80 hover:bg-black/5 hover:text-black font-bold"
-  //   : "text-white/80 hover:bg-white/15 hover:text-white font-bold";
 const normalLink ="text-black/80 hover:bg-black/5 hover:text-black font-bold";
 const activeLink = scrolled 
   ? "text-purple-500" 
@@ -135,6 +127,7 @@ const dropdownItem =
                           item.cta ? ctaLink : normalLink,
                           active && !item.cta ? activeLink : "",
                         ].join(" ")}
+                        target={item.target?item.target:""}
                       >
                         {item.label}
                       </Link>
@@ -188,7 +181,6 @@ const dropdownItem =
               })}
             </ul>
           </nav>
-
           {/* 모바일 햄버거 */}
           <div className="lg:hidden">
             <button
