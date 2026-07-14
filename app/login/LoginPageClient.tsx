@@ -42,6 +42,7 @@ export default function LoginPageClient() {
     setLoading(false);
 
     if (!result || result.error) {
+      console.log(result?.error);
       setError("아이디 또는 비밀번호가 올바르지 않습니다.");
       return;
     }
