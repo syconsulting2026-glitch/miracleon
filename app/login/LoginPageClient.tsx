@@ -38,6 +38,7 @@ export default function LoginPageClient() {
       redirect: false,
       callbackUrl,
     });
+    console.log(result);
 
     setLoading(false);
 
