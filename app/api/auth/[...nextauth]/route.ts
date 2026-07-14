@@ -15,18 +15,34 @@ const handler = NextAuth({
           const adminId = credentials?.adminId ?? "";
           const password = credentials?.password ?? "";
 
-          if (!adminId || !password) return null;
+          if (!adminId || !password) {
+            console.error("[NextAuth] 아이디나 비밀번호가 비어있음");
+            return null;
+          }
 
-          const r = await fetch(`${process.env.BACKEND_URL}/auth/admin/login`, {
+          const res = await fetch(`${process.env.BACKEND_URL}/auth/admin/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ adminId, password }),
           });
 
-          console.log(r);
+          console.log("[NextAuth] 백엔드 응답 상태코드:", res.status);
 
-          if (!r.ok) return null;
-          const data = await r.json();
+          if (!res.ok) {
+            // 에러 원인을 파악하기 위해 백엔드가 보낸 에러 메시지를 확인합니다.
+            const errorText = await res.text(); 
+            console.error("[NextAuth] 백엔드 에러 내용:", errorText);
+            return null;
+          }
+
+          const data = await res.json();
+          console.log("[NextAuth] 백엔드에서 받은 데이터:", data);
+
+          // data.user가 존재하는지 방어 로직 추가
+          if (!data || !data.user) {
+             console.error("[NextAuth] 백엔드 응답에 user 객체가 없습니다.");
+             return null;
+          }
 
           return {
             id: String(data.user.id),
@@ -35,11 +51,12 @@ const handler = NextAuth({
             role: data.user.role,
             accessToken: data.accessToken,
           } as any;
+          
         } catch (e) {
-          console.error("[NextAuth] authorize error:", e);
+          console.error("[NextAuth] authorize 내부 예외 발생:", e);
           return null;
         }
-      },
+      }
     }),
   ],
   callbacks: {
